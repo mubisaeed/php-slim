@@ -1,8 +1,16 @@
-# Use the official PHP Alpine image as base
-FROM php:7-alpine
+# Use the official PHP image with Alpine Linux as base
+FROM php:8.0-alpine
 
 # Set the working directory in the container
 WORKDIR /var/www
+
+# Install system dependencies
+RUN apk add --no-cache \
+    curl \
+    git
+
+# Install Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Expose port 8080
 EXPOSE 8080
